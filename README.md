@@ -1,7 +1,7 @@
 # RetroBuild
 
 Is a simple build & export system for jars having other jars as dependencies. 
-What Retrobuild does is 
+What Retrobuild does is:
 
 1. Compiles sources
 
@@ -12,4 +12,4 @@ What Retrobuild does is
 Thus we have all the control for build and export process. 
 * Fully debugable
 * 100% Java
-* No IDE depdendance
+* No IDE depedendance
