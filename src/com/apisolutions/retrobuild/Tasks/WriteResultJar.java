@@ -16,14 +16,15 @@ public class WriteResultJar implements Task {
 
     @Override
     public void process() throws Exception {
+        System.out.println("Writing result jar");
         //prepare Manifest file
         Manifest manifest = new Manifest();
         Attributes global = manifest.getMainAttributes();
         global.put(Attributes.Name.MANIFEST_VERSION, "1.0.0");
-        global.put(Attributes.Name.MAIN_CLASS, "com.google.classyshark.ui.Main");
+        global.put(Attributes.Name.MAIN_CLASS, RetroBuild.MAIN_CLASS_IN_JAR);
 
         //create required jar name
-        String jarFileName = RetroBuild.RESULT_FOLDER + "/ClassyShark.jar";
+        String jarFileName = RetroBuild.RESULT_FOLDER + "/" + RetroBuild.JAR_NAME;
         JarOutputStream jos = null;
         try {
             File jarFile = new File(jarFileName);
@@ -35,7 +36,7 @@ public class WriteResultJar implements Task {
             e.printStackTrace();
         }
         jos.close();
-        System.out.println("Done");
+        System.out.println("Done Writing result jar");
     }
 
     private static void addFolderToJar(File source, JarOutputStream target) throws IOException {

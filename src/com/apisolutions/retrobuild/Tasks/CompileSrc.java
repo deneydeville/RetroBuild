@@ -14,6 +14,7 @@ public class CompileSrc implements Task {
 
     @Override
     public void process() throws Exception {
+        System.out.println("Compiling");
         ArrayList<String> allSources = new ArrayList<String>();
         collectFileNamesTo(allSources, RetroBuild.SOURCES_FOLDER, ".java");
 
@@ -21,6 +22,7 @@ public class CompileSrc implements Task {
         collectFileNamesTo(allThirdParty, RetroBuild.THIRD_PARTY_JARS, ".jar");
 
         compile(allSources, allThirdParty, RetroBuild.RESULT_FOLDER, "1.7");
+        System.out.println("Done Compiling");
     }
 
     /**

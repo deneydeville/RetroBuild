@@ -11,7 +11,9 @@ public class ExpandThirdParty implements Task {
 
     @Override
     public void process() throws Exception {
+        System.out.println("Expanding 3rd party jars");
         extractJars();
+        System.out.println("Done Expanding 3rd party jars");
     }
 
     private static void extractJars() throws Exception {

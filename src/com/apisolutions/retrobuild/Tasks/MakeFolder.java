@@ -13,7 +13,7 @@ import java.nio.file.attribute.BasicFileAttributes;
 public class MakeFolder implements Task {
     @Override
     public void process() throws IOException {
-
+        System.out.println("Preparing result folder");
         Path directory = Paths.get(RetroBuild.RESULT_FOLDER);
         new File(RetroBuild.RESULT_FOLDER).mkdir();
         Files.walkFileTree(directory, new SimpleFileVisitor<Path>() {
@@ -32,5 +32,6 @@ public class MakeFolder implements Task {
         });
 
         new File(RetroBuild.RESULT_FOLDER).mkdir();
+        System.out.println("Done result folder");
     }
 }
