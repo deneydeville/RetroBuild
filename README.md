@@ -33,5 +33,5 @@ Thus we have all the control for build and export process.
             "...";
 
     public static final String JAR_NAME =
-            "...r";
+            "...";
 ```
