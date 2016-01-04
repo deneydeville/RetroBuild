@@ -10,7 +10,7 @@ public class ClassySharkBuildConfig extends BuildConfig {
 
     @Override
     public String getResultFolder() {
-        return BASE + "/Desktop/test";
+        return BASE + "/Desktop/classyshark_build";
     }
 
     @Override

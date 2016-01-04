@@ -1,6 +1,5 @@
 package com.apisolutions.retrobuild.tasks;
 
-import com.apisolutions.retrobuild.RetroBuild;
 import com.apisolutions.retrobuild.builds.BuildConfig;
 import com.apisolutions.retrobuild.builds.ClassySharkBuildConfig;
 import java.io.File;
@@ -95,11 +94,16 @@ public class CompileSrc extends Task {
     }
 
     private static void collectFileNamesTo(ArrayList<String> to,
-            String from, String which) {
+                                           String from, String which) {
         File directory = new File(from);
 
         // get all the files from a directory
         File[] fList = directory.listFiles();
+
+        if (fList == null) {
+            return;
+        }
+
         for (File file : fList) {
             // check suffix
             if (file.isFile() && file.getName().endsWith(which)) {

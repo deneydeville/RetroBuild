@@ -1,6 +1,5 @@
 package com.apisolutions.retrobuild.tasks;
 
-import com.apisolutions.retrobuild.RetroBuild;
 import com.apisolutions.retrobuild.builds.BuildConfig;
 import com.apisolutions.retrobuild.builds.ClassySharkBuildConfig;
 import java.io.BufferedInputStream;

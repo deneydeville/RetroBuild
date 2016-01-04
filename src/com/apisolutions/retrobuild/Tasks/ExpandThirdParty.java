@@ -34,28 +34,35 @@ public class ExpandThirdParty extends Task {
     private static void extractJar(String jarFile, String destDir) throws Exception {
         JarFile jar = new JarFile(jarFile);
         Enumeration<? extends JarEntry> entries = jar.entries();
+
         while (entries.hasMoreElements()) {
-            JarEntry file = entries.nextElement();
-            java.io.File f = new java.io.File(destDir + java.io.File.separator + file.getName());
-            if (file.isDirectory()) {
-                f.mkdir();
-                continue;
+            try {
+                JarEntry file = entries.nextElement();
+                java.io.File f = new java.io.File(destDir + java.io.File.separator + file.getName());
+                if (file.isDirectory()) {
+                    f.mkdir();
+                    continue;
+                }
+
+                f.getParentFile().mkdirs();
+                f.createNewFile();
+                java.io.InputStream is = jar.getInputStream(file);
+
+                FileOutputStream fos = new FileOutputStream(f);
+
+                byte[] buffer = new byte[1024];
+                int len;
+                while ((len = is.read(buffer)) != -1) {
+                    fos.write(buffer, 0, len);
+                }
+
+                fos.close();
+                is.close();
             }
-
-            f.getParentFile().mkdirs();
-            f.createNewFile();
-            java.io.InputStream is = jar.getInputStream(file);
-
-            FileOutputStream fos = new FileOutputStream(f);
-
-            byte[] buffer = new byte[1024];
-            int len;
-            while ((len = is.read(buffer)) != -1) {
-                fos.write(buffer, 0, len);
+            catch (Exception e) {
+                // TODO figure out why JarEntry file = entries.nextElement();
+                // TODO throws Null Exception, the created jar is totally fine ?
             }
-
-            fos.close();
-            is.close();
         }
     }
 
@@ -63,6 +70,11 @@ public class ExpandThirdParty extends Task {
         File directory = new File(from);
 
         File[] fList = directory.listFiles();
+
+        if (fList == null) {
+            return;
+        }
+
         for (File file : fList) {
             if (file.isFile() && file.getName().endsWith(".jar")) {
                 to.add(file);
