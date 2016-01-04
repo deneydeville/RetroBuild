@@ -18,20 +18,23 @@ Thus we have all the control for build and export process.
 
 1. Download/clone repository
 2. Go to [RetroBuild.java](https://github.com/borisf/RetroBuild/blob/master/src/com/apisolutions/retrobuild/RetroBuild.java)
-3. Change to your parameters
+
 ```java
-  public static final String SOURCES_FOLDER =
-            "...";
+  public static void main(String[] args) throws Exception {
+        RetroBuild.with(new ClassySharkBuildConfig()).build();
+    }
+```
 
-    public static final String RESULT_FOLDER =
-            "...";
 
-    public static final String THIRD_PARTY_JARS =
-            "...";
+3. Create your [BuildConfig](https://github.com/borisf/RetroBuild/blob/master/src/com/apisolutions/retrobuild/builds/BuildConfig.java) 
+```java
+  public abstract String getSourcesFolder();
 
-    public static final String MAIN_CLASS_IN_JAR =
-            "...";
+    public abstract String getResultFolder();
 
-    public static final String JAR_NAME =
-            "...";
+    public abstract String getThirdPartyJarsFolder();
+
+    public abstract String getMainClassInJar();
+
+    public abstract String getJarName();
 ```
