@@ -17,7 +17,7 @@ Thus we have all the control for build and export process.
 ## How to run
 
 1. Download/clone repository
-2. Go to [RetroBuild.java](https://github.com/borisf/RetroBuild/blob/master/src/com/apisolutions/retrobuild/RetroBuild.java)
+2. Go to [RetroBuild.java](https://github.com/borisf/RetroBuild/blob/master/src/com/apisolutions/retrobuild/RetroBuild.java), this will be our starting point
 
 ```java
   public static void main(String[] args) throws Exception {
@@ -26,9 +26,9 @@ Thus we have all the control for build and export process.
 ```
 
 
-3. Create your [BuildConfig](https://github.com/borisf/RetroBuild/blob/master/src/com/apisolutions/retrobuild/builds/BuildConfig.java) 
+3. Create your [BuildConfig](https://github.com/borisf/RetroBuild/blob/master/src/com/apisolutions/retrobuild/builds/BuildConfig.java) by implementing the methods below, and add to Retrobuild objetc from the previous step
 ```java
-  public abstract String getSourcesFolder();
+    public abstract String getSourcesFolder();
 
     public abstract String getResultFolder();
 
