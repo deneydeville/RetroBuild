@@ -1,38 +1,31 @@
 package com.apisolutions.retrobuild;
 
-import com.apisolutions.retrobuild.Tasks.CompileSrc;
-import com.apisolutions.retrobuild.Tasks.ExpandThirdParty;
-import com.apisolutions.retrobuild.Tasks.MakeFolder;
-import com.apisolutions.retrobuild.Tasks.Task;
-import com.apisolutions.retrobuild.Tasks.WriteResultJar;
+import com.apisolutions.retrobuild.builds.BuildConfig;
+import com.apisolutions.retrobuild.builds.ClassySharkBuildConfig;
+import com.apisolutions.retrobuild.tasks.CompileSrc;
+import com.apisolutions.retrobuild.tasks.ExpandThirdParty;
+import com.apisolutions.retrobuild.tasks.MakeFolder;
+import com.apisolutions.retrobuild.tasks.Task;
+import com.apisolutions.retrobuild.tasks.WriteResultJar;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 public class RetroBuild {
-    public static final String SOURCES_FOLDER =
-            "/Users/bfarber/Development/android-classyshark/ClassySharkWS/src";
 
-    public static final String RESULT_FOLDER =
-            "/Users/bfarber/Desktop/test";
+    private BuildConfig buildConfig;
 
-    public static final String THIRD_PARTY_JARS =
-            "/Users/bfarber/Development/android-classyshark/third_party";
+    private RetroBuild(BuildConfig buildConfig) {
+        this.buildConfig = buildConfig;
+    }
 
-    public static final String MAIN_CLASS_IN_JAR =
-            "com.google.classyshark.ui.Main";
-
-    public static final String JAR_NAME =
-            "ClassyShark.jar";
-
-    public static void main(String[] args) throws Exception {
-
+    public void build() throws Exception {
         long start = System.currentTimeMillis();
         ArrayList<Task> tasks = new ArrayList<Task>();
 
-        tasks.add(new MakeFolder());
-        tasks.add(new CompileSrc());
-        tasks.add(new ExpandThirdParty());
-        tasks.add(new WriteResultJar());
+        tasks.add(new MakeFolder(buildConfig));
+        tasks.add(new CompileSrc(buildConfig));
+        tasks.add(new ExpandThirdParty(buildConfig));
+        tasks.add(new WriteResultJar(buildConfig));
 
         for (Task task : tasks) {
             task.process();
@@ -41,5 +34,13 @@ public class RetroBuild {
         System.out.println("DONE "
                 + TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis() - start)
                 + " seconds");
+    }
+
+    private static RetroBuild with(BuildConfig buildConfig) {
+        return new RetroBuild(buildConfig);
+    }
+
+    public static void main(String[] args) throws Exception {
+        RetroBuild.with(new ClassySharkBuildConfig()).build();
     }
 }

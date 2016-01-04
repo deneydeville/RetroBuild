@@ -1,6 +1,8 @@
-package com.apisolutions.retrobuild.Tasks;
+package com.apisolutions.retrobuild.tasks;
 
 import com.apisolutions.retrobuild.RetroBuild;
+import com.apisolutions.retrobuild.builds.BuildConfig;
+import com.apisolutions.retrobuild.builds.ClassySharkBuildConfig;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -12,7 +14,11 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarOutputStream;
 import java.util.jar.Manifest;
 
-public class WriteResultJar implements Task {
+public class WriteResultJar extends Task {
+
+    public WriteResultJar(BuildConfig buildConfig) {
+        super(buildConfig);
+    }
 
     @Override
     public void process() throws Exception {
@@ -21,17 +27,17 @@ public class WriteResultJar implements Task {
         Manifest manifest = new Manifest();
         Attributes global = manifest.getMainAttributes();
         global.put(Attributes.Name.MANIFEST_VERSION, "1.0.0");
-        global.put(Attributes.Name.MAIN_CLASS, RetroBuild.MAIN_CLASS_IN_JAR);
+        global.put(Attributes.Name.MAIN_CLASS, buildConfig.getMainClassInJar());
 
         //create required jar name
-        String jarFileName = RetroBuild.RESULT_FOLDER + "/" + RetroBuild.JAR_NAME;
+        String jarFileName = buildConfig.getResultFolder() + "/" + buildConfig.getJarName();
         JarOutputStream jos = null;
         try {
             File jarFile = new File(jarFileName);
             OutputStream os = new FileOutputStream(jarFile);
             jos = new JarOutputStream(os, manifest);
 
-            addFolderToJar(new File(RetroBuild.RESULT_FOLDER), jos);
+            addFolderToJar(new File(buildConfig.getResultFolder()), jos, buildConfig.getResultFolder());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -39,7 +45,7 @@ public class WriteResultJar implements Task {
         System.out.println("Done Writing result jar");
     }
 
-    private static void addFolderToJar(File source, JarOutputStream target) throws IOException {
+    private static void addFolderToJar(File source, JarOutputStream target, String jarResultFolder) throws IOException {
         BufferedInputStream in = null;
         try {
             if (source.isDirectory()) {
@@ -48,17 +54,17 @@ public class WriteResultJar implements Task {
                     if (!name.endsWith("/")) {
                         name += "/";
                     }
-                    JarEntry entry = new JarEntry(convert(name, RetroBuild.RESULT_FOLDER));
+                    JarEntry entry = new JarEntry(convert(name, jarResultFolder));
                     entry.setTime(source.lastModified());
                     target.putNextEntry(entry);
                     target.closeEntry();
                 }
                 for (File nestedFile : source.listFiles())
-                    addFolderToJar(nestedFile, target);
+                    addFolderToJar(nestedFile, target, jarResultFolder);
                 return;
             }
 
-            JarEntry entry = new JarEntry(convert(source.getPath(), RetroBuild.RESULT_FOLDER).replace("\\", "/"));
+            JarEntry entry = new JarEntry(convert(source.getPath(), jarResultFolder).replace("\\", "/"));
             entry.setTime(source.lastModified());
 
             // TODO hack need to fix, foreign manifest
@@ -89,6 +95,6 @@ public class WriteResultJar implements Task {
     }
 
     public static void main(String[] args) throws Exception {
-        new WriteResultJar().process();
+        new WriteResultJar(new ClassySharkBuildConfig()).process();
     }
 }

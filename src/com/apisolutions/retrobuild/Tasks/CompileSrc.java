@@ -1,6 +1,8 @@
-package com.apisolutions.retrobuild.Tasks;
+package com.apisolutions.retrobuild.tasks;
 
 import com.apisolutions.retrobuild.RetroBuild;
+import com.apisolutions.retrobuild.builds.BuildConfig;
+import com.apisolutions.retrobuild.builds.ClassySharkBuildConfig;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,18 +12,22 @@ import javax.tools.ToolProvider;
 /**
  * based on https://github.com/EsotericSoftware/scar/blob/master/src/com/esotericsoftware/scar/Scar.java
  */
-public class CompileSrc implements Task {
+public class CompileSrc extends Task {
+
+    public CompileSrc(BuildConfig buildConfig) {
+        super(buildConfig);
+    }
 
     @Override
     public void process() throws Exception {
         System.out.println("Compiling");
         ArrayList<String> allSources = new ArrayList<String>();
-        collectFileNamesTo(allSources, RetroBuild.SOURCES_FOLDER, ".java");
+        collectFileNamesTo(allSources, buildConfig.getSourcesFolder(), ".java");
 
         ArrayList<String> allThirdParty = new ArrayList<String>();
-        collectFileNamesTo(allThirdParty, RetroBuild.THIRD_PARTY_JARS, ".jar");
+        collectFileNamesTo(allThirdParty, buildConfig.getThirdPartyJarsFolder(), ".jar");
 
-        compile(allSources, allThirdParty, RetroBuild.RESULT_FOLDER, "1.7");
+        compile(allSources, allThirdParty, buildConfig.getResultFolder(), "1.7");
         System.out.println("Done Compiling");
     }
 
@@ -105,6 +111,6 @@ public class CompileSrc implements Task {
     }
 
     public static void main(String[] args) throws Exception {
-        new CompileSrc().process();
+        new CompileSrc(new ClassySharkBuildConfig()).process();
     }
 }

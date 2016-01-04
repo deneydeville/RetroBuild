@@ -1,6 +1,7 @@
-package com.apisolutions.retrobuild.Tasks;
+package com.apisolutions.retrobuild.tasks;
 
-import com.apisolutions.retrobuild.RetroBuild;
+import com.apisolutions.retrobuild.builds.BuildConfig;
+import com.apisolutions.retrobuild.builds.ClassySharkBuildConfig;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
@@ -8,21 +9,25 @@ import java.util.Enumeration;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-public class ExpandThirdParty implements Task {
+public class ExpandThirdParty extends Task {
+
+    public ExpandThirdParty(BuildConfig buildConfig) {
+        super(buildConfig);
+    }
 
     @Override
     public void process() throws Exception {
         System.out.println("Expanding 3rd party jars");
-        extractJars();
+        extractJars(buildConfig.getThirdPartyJarsFolder(), buildConfig.getResultFolder());
         System.out.println("Done Expanding 3rd party jars");
     }
 
-    private static void extractJars() throws Exception {
+    private static void extractJars(String thirdPartyJarsFolder, String resultFolder) throws Exception {
         ArrayList<File> jars = new ArrayList<File>();
-        collectJarNamesTo(jars, RetroBuild.THIRD_PARTY_JARS);
+        collectJarNamesTo(jars, thirdPartyJarsFolder);
 
         for (File jar : jars) {
-            extractJar(jar.getAbsolutePath(), RetroBuild.RESULT_FOLDER);
+            extractJar(jar.getAbsolutePath(), resultFolder);
         }
     }
 
@@ -68,6 +73,6 @@ public class ExpandThirdParty implements Task {
     }
 
     public static void main(String[] args) throws Exception {
-        new ExpandThirdParty().process();
+        new ExpandThirdParty(new ClassySharkBuildConfig()).process();
     }
 }
