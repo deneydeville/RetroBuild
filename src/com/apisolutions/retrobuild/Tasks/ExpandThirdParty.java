@@ -44,6 +44,11 @@ public class ExpandThirdParty extends Task {
                     continue;
                 }
 
+                if(!f.getName().endsWith(".class")) {
+                    continue;
+                }
+
+
                 f.getParentFile().mkdirs();
                 f.createNewFile();
                 java.io.InputStream is = jar.getInputStream(file);
