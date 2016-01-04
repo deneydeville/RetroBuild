@@ -19,7 +19,7 @@ public class ExpandThirdParty implements Task {
 
     private static void extractJars() throws Exception {
         ArrayList<File> jars = new ArrayList<File>();
-        collectFileNamesTo(jars, RetroBuild.THIRD_PARTY_JARS);
+        collectJarNamesTo(jars, RetroBuild.THIRD_PARTY_JARS);
 
         for (File jar : jars) {
             extractJar(jar.getAbsolutePath(), RetroBuild.RESULT_FOLDER);
@@ -54,15 +54,15 @@ public class ExpandThirdParty implements Task {
         }
     }
 
-    private static void collectFileNamesTo(ArrayList<File> to, String from) {
+    private static void collectJarNamesTo(ArrayList<File> to, String from) {
         File directory = new File(from);
 
         File[] fList = directory.listFiles();
         for (File file : fList) {
-            if (file.isFile()) {
+            if (file.isFile() && file.getName().endsWith(".jar")) {
                 to.add(file);
             } else if (file.isDirectory()) {
-                collectFileNamesTo(to, file.getAbsolutePath());
+                collectJarNamesTo(to, file.getAbsolutePath());
             }
         }
     }
