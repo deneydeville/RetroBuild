@@ -67,7 +67,7 @@ public class WriteResultJar extends Task {
             entry.setTime(source.lastModified());
 
             // TODO hack need to fix, foreign manifest
-            if (!entry.getName().equals("META-INF/MANIFEST.MF")) {
+            //if (!entry.getName().equals("META-INF/MANIFEST.MF")) {
                 target.putNextEntry(entry);
                 in = new BufferedInputStream(new FileInputStream(source));
 
@@ -80,7 +80,7 @@ public class WriteResultJar extends Task {
                     target.write(buffer, 0, count);
                 }
                 target.closeEntry();
-            }
+           // }
         } finally {
             if (in != null) {
                 in.close();
