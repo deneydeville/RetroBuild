@@ -38,6 +38,4 @@ Thus we have all the control for build and export process.
 
     public abstract String getJarName();
 ```
-## Limitations
 
-I use Retrobuild to buid app jars. It is possible to build library jar, that work from the classpath and the command line, but IDE can't parse them. Some investigation + work needed around the jar writing.
