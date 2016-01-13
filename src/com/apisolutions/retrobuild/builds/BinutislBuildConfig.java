@@ -1,30 +1,30 @@
 package com.apisolutions.retrobuild.builds;
 
-public class ClassySharkBuildConfig extends BuildConfig {
+public class BinutislBuildConfig extends BuildConfig {
     private static final String BASE = System.getProperty("user.home");
 
     @Override
     public String getSourcesFolder() {
-        return BASE + "/Development/android-classyshark/ClassySharkWS/src";
+        return BASE + "/Development/java-binutils/src";
     }
 
     @Override
     public String getResultFolder() {
-        return BASE + "/Desktop/classyshark_build";
+        return BASE + "/Desktop/binutils_build";
     }
 
     @Override
     public String getThirdPartyJarsFolder() {
-        return BASE + "/Development/android-classyshark/third_party";
+        return "";
     }
 
     @Override
     public String getMainClassInJar() {
-        return "com.google.classyshark.Main";
+        return "nl.lxtreme.binutils.elf.Elf";
     }
 
     @Override
     public String getJarName() {
-        return "ClassyShark.jar";
+        return "java-binutils.jar";
     }
 }

@@ -1,16 +1,17 @@
 package com.apisolutions.retrobuild.builds;
 
-public class ClassySharkBuildConfig extends BuildConfig {
+public class SilverGhostBuildConfig extends BuildConfig {
     private static final String BASE = System.getProperty("user.home");
 
     @Override
     public String getSourcesFolder() {
-        return BASE + "/Development/android-classyshark/ClassySharkWS/src";
+        return BASE + "/Development/android-classyshark/ClassySharkWS/src/com/"
+                + "google/silverghost";
     }
 
     @Override
     public String getResultFolder() {
-        return BASE + "/Desktop/classyshark_build";
+        return BASE + "/Desktop/silverghost_build";
     }
 
     @Override
@@ -20,11 +21,12 @@ public class ClassySharkBuildConfig extends BuildConfig {
 
     @Override
     public String getMainClassInJar() {
-        return "com.google.classyshark.Main";
+        return "com.google.silverghost."
+                + "translator.java.StressTest";
     }
 
     @Override
     public String getJarName() {
-        return "ClassyShark.jar";
+        return "c.jar";
     }
 }
