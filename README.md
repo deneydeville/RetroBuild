@@ -26,7 +26,7 @@ Thus we have all the control for build and export process.
 ```
 
 
-3. Create your [BuildConfig](https://github.com/borisf/RetroBuild/blob/master/src/com/apisolutions/retrobuild/builds/BuildConfig.java) by implementing the methods below, and add to Retrobuild objetc from the previous step
+3. Create your [BuildConfig](https://github.com/borisf/RetroBuild/blob/master/src/com/apisolutions/retrobuild/builds/BuildConfig.java) by implementing the methods below, and add to Retrobuild object from the previous step
 ```java
     public abstract String getSourcesFolder();
 
