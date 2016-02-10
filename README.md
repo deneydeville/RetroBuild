@@ -12,7 +12,7 @@ What Retrobuild does is:
 Thus we have all the control for build and export process. 
 * Fully debugable
 * 100% Java
-* No IDE depedendance
+* No IDE dependence
 
 ## How to run
 
