@@ -8,6 +8,8 @@ public abstract class BuildConfig {
 
     public abstract String getThirdPartyJarsFolder();
 
+    public abstract String getResourcesFolder();
+
     public abstract String getMainClassInJar();
 
     public abstract String getJarName();

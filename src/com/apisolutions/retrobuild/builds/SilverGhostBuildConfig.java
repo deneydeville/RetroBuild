@@ -20,6 +20,11 @@ public class SilverGhostBuildConfig extends BuildConfig {
     }
 
     @Override
+    public String getResourcesFolder() {
+        return "";
+    }
+
+    @Override
     public String getMainClassInJar() {
         return "com.google.silverghost."
                 + "translator.java.StressTest";

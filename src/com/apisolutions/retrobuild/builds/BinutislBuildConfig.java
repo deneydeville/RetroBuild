@@ -19,6 +19,11 @@ public class BinutislBuildConfig extends BuildConfig {
     }
 
     @Override
+    public String getResourcesFolder() {
+        return "";
+    }
+
+    @Override
     public String getMainClassInJar() {
         return "nl.lxtreme.binutils.elf.Elf";
     }

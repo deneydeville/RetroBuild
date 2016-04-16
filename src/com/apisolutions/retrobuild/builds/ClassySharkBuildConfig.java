@@ -19,6 +19,11 @@ public class ClassySharkBuildConfig extends BuildConfig {
     }
 
     @Override
+    public String getResourcesFolder() {
+        return BASE + "/Development/android-classyshark/ClassySharkWS/src/resources";
+    }
+
+    @Override
     public String getMainClassInJar() {
         return "com.google.classyshark.Main";
     }
