@@ -2,6 +2,7 @@ package com.apisolutions.retrobuild.tasks;
 
 import com.apisolutions.retrobuild.builds.BuildConfig;
 import com.apisolutions.retrobuild.builds.ClassySharkBuildConfig;
+import com.apisolutions.retrobuild.builds.CrazySharkBuildConfig;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -28,8 +29,8 @@ public class WriteResultJar extends Task {
         global.put(Attributes.Name.MANIFEST_VERSION, "1.0.0");
         global.put(Attributes.Name.MAIN_CLASS, buildConfig.getMainClassInJar());
 
-        //create required jar name
-        String jarFileName = buildConfig.getResultFolder() + "/" + buildConfig.getJarName();
+        //create the required jar name
+        String jarFileName = buildConfig.getResultFolder() + "/../" + buildConfig.getJarName();
         JarOutputStream jos = null;
         try {
             File jarFile = new File(jarFileName);
@@ -46,6 +47,7 @@ public class WriteResultJar extends Task {
     }
 
     private static void addFolderToJar(File source, JarOutputStream target, String jarResultFolder) throws IOException {
+
         BufferedInputStream in = null;
         try {
             if (source.isDirectory()) {
@@ -63,8 +65,11 @@ public class WriteResultJar extends Task {
                     target.putNextEntry(entry);
                     target.closeEntry();
                 }
-                for (File nestedFile : source.listFiles())
+
+                for (File nestedFile : source.listFiles()) {
                     addFolderToJar(nestedFile, target, jarResultFolder);
+                }
+
                 return;
             }
 
@@ -97,6 +102,7 @@ public class WriteResultJar extends Task {
 
     public static void main(String[] args) throws Exception {
         //new WriteResultJar(new SilverGhostBuildConfig()).process();
-        new WriteResultJar(new ClassySharkBuildConfig()).process();
+        //new WriteResultJar(new ClassySharkBuildConfig()).process();
+        new WriteResultJar(new CrazySharkBuildConfig()).process();
     }
 }

@@ -1,5 +1,8 @@
 package com.apisolutions.retrobuild.builds;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class SilverGhostBuildConfig extends BuildConfig {
     private static final String BASE = System.getProperty("user.home");
 
@@ -33,5 +36,10 @@ public class SilverGhostBuildConfig extends BuildConfig {
     @Override
     public String getJarName() {
         return "c.jar";
+    }
+
+    @Override
+    public List<String> getOptionalThirdPartyJarsFolders() {
+        return new LinkedList<String>();
     }
 }

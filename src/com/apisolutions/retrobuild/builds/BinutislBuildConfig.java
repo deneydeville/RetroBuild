@@ -1,5 +1,8 @@
 package com.apisolutions.retrobuild.builds;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class BinutislBuildConfig extends BuildConfig {
     private static final String BASE = System.getProperty("user.home");
 
@@ -31,5 +34,10 @@ public class BinutislBuildConfig extends BuildConfig {
     @Override
     public String getJarName() {
         return "java-binutils.jar";
+    }
+
+    @Override
+    public List<String> getOptionalThirdPartyJarsFolders() {
+        return new LinkedList<String>();
     }
 }

@@ -1,7 +1,10 @@
 package com.apisolutions.retrobuild.builds;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class ClassySharkBuildConfig extends BuildConfig {
-    private static final String BASE = System.getProperty("user.home");
+    protected static final String BASE = System.getProperty("user.home");
 
     @Override
     public String getSourcesFolder() {
@@ -31,5 +34,10 @@ public class ClassySharkBuildConfig extends BuildConfig {
     @Override
     public String getJarName() {
         return "ClassyShark.jar";
+    }
+
+    @Override
+    public List<String> getOptionalThirdPartyJarsFolders() {
+        return new LinkedList<String>();
     }
 }

@@ -22,7 +22,7 @@ public class ExpandThirdParty extends Task {
         System.out.println("Done Expanding 3rd party jars");
     }
 
-    private static void extractJars(String thirdPartyJarsFolder, String resultFolder) throws Exception {
+    protected static void extractJars(String thirdPartyJarsFolder, String resultFolder) throws Exception {
         ArrayList<File> jars = new ArrayList<File>();
         collectJarNamesTo(jars, thirdPartyJarsFolder);
 

@@ -2,8 +2,10 @@ package com.apisolutions.retrobuild;
 
 import com.apisolutions.retrobuild.builds.BuildConfig;
 import com.apisolutions.retrobuild.builds.ClassySharkBuildConfig;
+import com.apisolutions.retrobuild.builds.CrazySharkBuildConfig;
 import com.apisolutions.retrobuild.tasks.CompileSrc;
 import com.apisolutions.retrobuild.tasks.ExpandThirdParty;
+import com.apisolutions.retrobuild.tasks.ExpandThirdPartyFolders;
 import com.apisolutions.retrobuild.tasks.MakeFolder;
 import com.apisolutions.retrobuild.tasks.CopyResources;
 import com.apisolutions.retrobuild.tasks.Task;
@@ -26,6 +28,7 @@ public class RetroBuild {
         tasks.add(new MakeFolder(buildConfig));
         tasks.add(new CompileSrc(buildConfig));
         tasks.add(new ExpandThirdParty(buildConfig));
+        tasks.add(new ExpandThirdPartyFolders(buildConfig));
         tasks.add(new CopyResources(buildConfig));
         tasks.add(new WriteResultJar(buildConfig));
 
@@ -44,6 +47,7 @@ public class RetroBuild {
 
     public static void main(String[] args) throws Exception {
         RetroBuild.with(new ClassySharkBuildConfig()).build();
+        //RetroBuild.with(new CrazySharkBuildConfig()).build();
         //RetroBuild.with(new SilverGhostBuildConfig()).build();
         //RetroBuild.with(new BinutislBuildConfig()).build();
     }
